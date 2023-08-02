@@ -7,6 +7,8 @@ import 'package:movies_app/core/util/end_points.dart';
 import 'package:movies_app/screens/cubit/movie_cubit.dart';
 import 'package:movies_app/screens/cubit/movie_state.dart';
 
+import '../details_screen.dart';
+
 class NowPlayingComponent extends StatelessWidget {
   const NowPlayingComponent({Key? key}) : super(key: key);
 
@@ -32,7 +34,7 @@ class NowPlayingComponent extends StatelessWidget {
                 return GestureDetector(
                   key: const Key('openMovieMinimalDetail'),
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id: state.nowPlayingMovies[index].id)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id: item.id!)));
                   },
                   child: Stack(
                     children: [

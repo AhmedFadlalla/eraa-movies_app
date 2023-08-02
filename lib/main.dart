@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>MovieCubit()..getNowPlayingData()..getPopularData())
+      BlocProvider(create: (context)=>MovieCubit()..getNowPlayingData()..getPopularData()..getTopRatedData())
     ], child: MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

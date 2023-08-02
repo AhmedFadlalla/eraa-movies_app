@@ -19,3 +19,22 @@ class GetPopularErrorState extends MovieState{
   GetPopularErrorState({
     required this.error});
 }
+
+
+class GetTopRatedLoadingState extends MovieState{}
+class GetTopRatedSuccessState extends MovieState{}
+class GetTopRatedErrorState extends MovieState{
+  final String error;
+
+  GetTopRatedErrorState({
+    required this.error});
+}
+
+class GetMovieDetailsDataLoadingState extends MovieState{}
+class GetMovieDetailsDataSuccessState extends MovieState{}
+class GetMovieDetailsDataErrorState extends MovieState{
+  final String error;
+
+  GetMovieDetailsDataErrorState({
+    required this.error});
+}

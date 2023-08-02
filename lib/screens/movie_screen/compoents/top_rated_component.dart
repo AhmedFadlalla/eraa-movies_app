@@ -8,6 +8,7 @@ import 'package:movies_app/screens/cubit/movie_state.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../cubit/movie_cubit.dart';
+import '../details_screen.dart';
 
 
 class TopRatedComponent extends StatelessWidget {
@@ -21,7 +22,8 @@ class TopRatedComponent extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit=MovieCubit.get(context);
-        return FadeIn(
+        return cubit.topRatedDataModel!=null?
+        FadeIn(
           duration: const Duration(milliseconds: 500),
           child: SizedBox(
             height: 170.0,
@@ -36,7 +38,7 @@ class TopRatedComponent extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: InkWell(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id: movie.id)));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id: cubit.topRatedDataModel!.results![index].id!)));
                     },
                     child: ClipRRect(
                       borderRadius:
@@ -44,8 +46,9 @@ class TopRatedComponent extends StatelessWidget {
                       child: CachedNetworkImage(
                         width: 120.0,
                         fit: BoxFit.cover,
-                        imageUrl: "${EndPoints
-                            .baseImageUrl}/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+                        imageUrl: EndPoints.imageUrl(
+                            cubit.topRatedDataModel!.results![index].posterPath!
+                        ),
                         placeholder: (context, url) =>
                             Shimmer.fromColors(
                               baseColor: Colors.grey[850]!,
@@ -68,7 +71,8 @@ class TopRatedComponent extends StatelessWidget {
               },
             ),
           ),
-        );
+        ):
+        CircularProgressIndicator();
       },
     );
   }

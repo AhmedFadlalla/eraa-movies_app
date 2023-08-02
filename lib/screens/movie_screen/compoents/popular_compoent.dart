@@ -9,6 +9,8 @@ import 'package:movies_app/screens/cubit/movie_cubit.dart';
 import 'package:movies_app/screens/cubit/movie_state.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../details_screen.dart';
+
 class PopularComponent extends StatelessWidget {
   const PopularComponent({Key? key}) : super(key: key);
 
@@ -36,7 +38,7 @@ class PopularComponent extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: InkWell(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id: movie.id)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetailScreen(id:cubit.popularMovieDataModel!.results![index].id!)));
                     },
                     child: ClipRRect(
                       borderRadius:

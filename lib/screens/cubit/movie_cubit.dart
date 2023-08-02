@@ -5,6 +5,7 @@ import 'package:movies_app/core/util/dio.dart';
 import 'package:movies_app/core/util/end_points.dart';
 import 'package:movies_app/screens/model/movie_model.dart';
 
+import '../model/movie_details_model.dart';
 import 'movie_state.dart';
 
 
@@ -31,13 +32,43 @@ MovieModel? nowPlayingMovieModel;
  MovieModel? popularMovieDataModel;
  Future <void> getPopularData()async{
    emit(GetPopularLoadingState());
-   final response=await DioHelper.getData(url: EndPoints.popularMoviesPath);
+   final response=await DioHelper.getData(
+       url: EndPoints.popularMoviesPath);
 
    if(response.statusCode==200){
      popularMovieDataModel=MovieModel.fromJson(response.data);
      emit(GetPopularSuccessState());
    }else{
      emit(GetPopularErrorState(error: response.data['message']));
+   }
+ }
+
+  MovieModel? topRatedDataModel;
+ Future<void> getTopRatedData()async{
+emit(GetTopRatedLoadingState());
+   final response=await DioHelper.getData(
+       url: EndPoints.topRatedMoviesPath);
+
+   if(response.statusCode==200){
+     topRatedDataModel=MovieModel.fromJson(response.data);
+     emit(GetTopRatedSuccessState());
+   }else{
+     emit(GetTopRatedErrorState(error: response.data['message']));
+   }
+ }
+
+  BaseMovieDetails? movieDetails;
+ Future<void> getDetailsData({
+  required int id
+})async{
+   emit(GetMovieDetailsDataLoadingState());
+   final response=await DioHelper.getData(url: EndPoints.movieDetails(id));
+
+   if(response.statusCode==200){
+     movieDetails=BaseMovieDetails.fromJson(response.data);
+     emit(GetMovieDetailsDataSuccessState());
+   }else{
+     emit(GetMovieDetailsDataErrorState(error: response.data['message']));
    }
  }
 
